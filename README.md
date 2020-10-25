@@ -1,6 +1,6 @@
-# QR code reader
+# D3 Tree Test
 
-It's a simple QR code reader by using [jsQR](https://github.com/cozmo/jsQR).
+It's a custom [D3.js](https://github.com/d3/d3) tree rendering.
 
 
 

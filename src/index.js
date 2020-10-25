@@ -1,7 +1,7 @@
 import "base.scss";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-// import "ress";
+import "ress";
 import * as d3 from "d3";
 
 // 描画する四角（ノード）のサイズ
@@ -43,9 +43,8 @@ const sampleData = {
 };
 
 // ツリー用データ設定
-// constでもいいが、後で変更していくインスタンスなので明示的にlet宣言にしておく
-let root = d3.hierarchy(sampleData);
-let tree = d3.tree();
+const root = d3.hierarchy(sampleData);
+const tree = d3.tree();
 // treeレイアウトのためのx, y座標をデータに付与してくれる
 tree(root);
 // それぞれのノードが持つ末端ノードの数を算出して、"value"というキー名でノードのデータに付与
@@ -129,13 +128,13 @@ g.selectAll(".link")
   .attr("class", "link")
   .attr("fill", "none")
   .attr("stroke", "black")
-  .attr(
-    "d",
-    (d) =>
-      `M${d.x},${d.y}
-      L${d.parent.x + rectSize.width + (basicSpace.width - rectSize.width) / 2},${d.y}
-      ${d.parent.x + rectSize.width + (basicSpace.width - rectSize.width) / 2},${d.parent.y}
-      ${d.parent.x + rectSize.width},${d.parent.y}`
+  .attr("d", (d) =>
+    `M${d.x},${d.y}
+    L${d.parent.x + rectSize.width + (basicSpace.width - rectSize.width) / 2},${d.y}
+    ${d.parent.x + rectSize.width + (basicSpace.width - rectSize.width) / 2},${d.parent.y}
+    ${d.parent.x + rectSize.width},${d.parent.y}`
+      .replace(/\r?\n/g, "")
+      .replace(/\s+/g, " ")
   )
   .attr("transform", (d) => `translate(0, ${rectSize.height / 2})`);
 
